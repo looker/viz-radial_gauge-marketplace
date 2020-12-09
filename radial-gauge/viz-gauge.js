@@ -564,7 +564,20 @@ looker.plugins.visualizations.add({
 		if (config.viz_trellis_by === "pivot" && queryResponse.pivots === undefined) {
 			this.addError({title: 'Invalid Input.', message: 'Add pivots or change trellis type.'});
 			return;
-		}
+    }
+
+    // Catch case where config is undefined on db-next
+    const applyDefualtConfig = () => {
+      for (let option in this.options) {
+        if (config[option] === undefined) {
+          config[option] = this.options[option].default
+        }
+      }
+    }
+    // if arm_length is undefined, all other config attributes are.
+		if (config.arm_length === undefined) {
+      applyDefualtConfig();
+    } 
 
 		// Extract value, value_label, target, target_label as a chunk
 		let chunk;
