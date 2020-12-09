@@ -575,7 +575,7 @@ looker.plugins.visualizations.add({
       }
     }
     // if arm_length is undefined, all other config attributes are.
-		if (config.arm_length === undefined) {
+    if (config.arm_length === undefined) {
       applyDefualtConfig();
     } 
 
