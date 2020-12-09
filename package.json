@@ -42,5 +42,7 @@
   "resolutions": {
     "js-yaml": "3.13.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "prettier": "2.2.1"
+  }
 }
