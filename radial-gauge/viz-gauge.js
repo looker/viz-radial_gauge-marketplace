@@ -3,6 +3,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import SSF from "ssf";
 
+const DEFAULT_MAX_RANGE = null
+
 function processPivot(data, queryResponse, config, viz, pivotKey) {
   data = data.length === undefined ? [data] : data;
   let dims, meas;
@@ -411,7 +413,7 @@ looker.plugins.visualizations.add({
       label: "Range Max Override",
       section: "Plot",
       order: 31,
-      default: 100.701,
+      default: DEFAULT_MAX_RANGE,
       display_size: "half",
     },
     value_label_type: {
@@ -770,7 +772,7 @@ looker.plugins.visualizations.add({
       chunk = processData(data, queryResponse, config, this);
     }
 
-    if (config.range_max === 100.701) {
+    if (config.range_max === DEFAULT_MAX_RANGE) {
       let num = Math.max(
         Math.ceil(chunk.value),
         chunk.target ? Math.ceil(chunk.target) : 0
@@ -778,7 +780,7 @@ looker.plugins.visualizations.add({
       var len = (num + "").length;
       var fac = Math.pow(10, len - 1);
       let default_max = Math.ceil(num / fac) * fac;
-      this.trigger("updateConfig", [{ range_max: default_max }]);
+      config.range_max = default_max
     }
     var viz = this;
     if (config.viz_trellis_by === "none") {
